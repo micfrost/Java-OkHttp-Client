@@ -3,7 +3,7 @@ package dev.micfro.okhttp;
 
 import okhttp3.*;
 
-public class OkHttpPOST {
+public class OkHttpPUT {
     public static void main(String[] args) {
 
         // create OkHttp client object
@@ -18,13 +18,13 @@ public class OkHttpPOST {
                 "\"userId\": 1\n" +
                 "}";
 
-        RequestBody body = RequestBody.create(jsonHeader, jsonContent);
+        RequestBody body = RequestBody.create(jsonContent, jsonHeader);
 
 
         // create a request object with the URL
          Request request = new Request.Builder()
-                 .url("https://jsonplaceholder.typicode.com/posts")
-                 .post(body)
+                 .url("https://jsonplaceholder.typicode.com/posts/1")
+                 .put(body)
                  .build();
 
         try {
@@ -36,16 +36,16 @@ public class OkHttpPOST {
             if (response.isSuccessful() && response.body() != null){
 
                     String responseBodyAsString = response.body().string();
-                    System.out.println("Response body for POST Request:");
+                    System.out.println("Response body for PUT Request:");
                     System.out.println(responseBodyAsString);
 
             } else {
                 // print the error message
-                System.out.println("Error occurred while sending POST request: " + response.code());
+                System.out.println("Error occurred while sending PUT request: " + response.code());
             }
 
         } catch (Exception e) {
-            System.out.println("Error occurred while sending POST request: " + e.getMessage());
+            System.out.println("Error occurred while sending PUT request: " + e.getMessage());
         }
     }
 }

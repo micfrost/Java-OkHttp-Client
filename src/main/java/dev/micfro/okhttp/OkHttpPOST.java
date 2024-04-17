@@ -3,7 +3,7 @@ package dev.micfro.okhttp;
 
 import okhttp3.*;
 
-public class OkHttpGET {
+public class OkHttpPOST {
     public static void main(String[] args) {
 
         // create OkHttp client object
@@ -18,13 +18,14 @@ public class OkHttpGET {
                 "\"userId\": 1\n" +
                 "}";
 
-        RequestBody body = RequestBody.create(jsonHeader, jsonContent);
+        RequestBody body = RequestBody.create(jsonContent, jsonHeader);
 
 
         // create a request object with the URL
-        Request request = new Request.Builder()
-                .url("https://jsonplaceholder.typicode.com/posts")
-                .build();
+         Request request = new Request.Builder()
+                 .url("https://jsonplaceholder.typicode.com/posts")
+                 .post(body)
+                 .build();
 
         try {
             // execute newCall method to make synchronous call request
@@ -32,20 +33,19 @@ public class OkHttpGET {
             Response response = client.newCall(request).execute();
 
             // check if the response is successful - status code 200
-            if (response.isSuccessful()) {
-                if (response.body() != null) {
-                    // get the response body as a string
+            if (response.isSuccessful() && response.body() != null){
+
                     String responseBodyAsString = response.body().string();
-                    System.out.println("Response body:");
+                    System.out.println("Response body for POST Request:");
                     System.out.println(responseBodyAsString);
-                }
+
             } else {
                 // print the error message
-                System.out.println("Error occurred while sending GET request");
+                System.out.println("Error occurred while sending POST request: " + response.code());
             }
 
         } catch (Exception e) {
-            System.out.println("Error occurred while sending GET request: " + e.getMessage());
+            System.out.println("Error occurred while sending POST request: " + e.getMessage());
         }
     }
 }

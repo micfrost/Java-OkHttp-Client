@@ -3,22 +3,11 @@ package dev.micfro.okhttp;
 
 import okhttp3.*;
 
-public class OkHttp {
+public class OkHttpGET {
     public static void main(String[] args) {
 
         // create OkHttp client object
         OkHttpClient client = new OkHttpClient();
-
-
-        // create a resource JSON object
-        MediaType jsonHeader = MediaType.parse("application/json; charset=utf-8");
-        String jsonContent = "{" +
-                "\"title\": \"Best Title\",\n" +
-                "\"body\": \"Best Body\",\n" +
-                "\"userId\": 1\n" +
-                "}";
-
-        RequestBody body = RequestBody.create(jsonHeader, jsonContent);
 
 
         // create a request object with the URL
